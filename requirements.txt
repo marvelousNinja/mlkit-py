@@ -1,4 +1,5 @@
 appnope==0.1.0
+attrs==17.3.0
 bleach==2.1.2
 decorator==4.1.2
 entrypoints==0.2.3
@@ -24,9 +25,12 @@ pandocfilters==1.4.2
 parso==0.1.0
 pexpect==4.3.0
 pickleshare==0.7.4
+pluggy==0.6.0
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
+py==1.5.2
 Pygments==2.2.0
+pytest==3.3.1
 python-dateutil==2.6.1
 pyzmq==16.0.3
 qtconsole==4.3.1
