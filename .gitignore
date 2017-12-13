@@ -34,6 +34,7 @@ src
 Read the Docs
 config.rst
 
+/.cache
 /.project
 /.pydevproject
 /.vscode
