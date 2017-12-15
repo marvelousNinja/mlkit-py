@@ -5,6 +5,7 @@ import numpy as np
 
 from .knn_regressor import KnnRegressor
 from .metrics import mae
+from .util import make_scaler
 
 def test_on_iris():
   full_path = os.path.realpath(__file__)
@@ -14,7 +15,9 @@ def test_on_iris():
   X = iris.drop('MEDV', axis=1).values
   y = iris['MEDV'].values
 
+  scale = make_scaler(X)
+
   model = KnnRegressor()
-  model.fit(X[:400], y[:400])
-  y_pred = model.predict(X[400:])
-  assert mae(y[400:], y_pred) == pytest.approx(4.91, 0.1)
+  model.fit(scale(X[:400]), y[:400])
+  y_pred = model.predict(scale(X[400:]))
+  assert mae(y[400:], y_pred) == pytest.approx(3.5, 0.1)
