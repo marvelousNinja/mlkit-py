@@ -17,4 +17,4 @@ def test_on_iris():
   model = LinearRegressor()
   model.fit(X[:400], y[:400])
   y_pred = model.predict(X[400:])
-  assert mae(y[400:], y_pred) == pytest.approx(6.74, 0.1)
+  assert mae(y[400:], y_pred) == pytest.approx(4.84, 0.1)
