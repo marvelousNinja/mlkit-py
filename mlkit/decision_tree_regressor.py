@@ -1,25 +1,46 @@
 import numpy as np
 
+# TODO AS: Yeah, sure
+def get_mean_split(column, X, y):
+    return [np.mean(X[:, column])]
+
+def mse_impurity(y):
+    mean = np.mean(y)
+    return np.mean((y - mean) ** 2)
+
+# TODO AS: Categorical split needs equality?
+def split_on_value(column, value):
+    return lambda X: X[:, column] >= value
+
 class DecisionTreeRegressor():
     def fit(self, X, y):
-        self.root = make_node(X, y)
+        self.root = make_node(
+            X, y,
+            leaf_predictor=np.mean,
+            # TODO AS: All these needed for split only
+            get_split_candidates=get_mean_split,
+            impurity=mse_impurity,
+            make_split=split_on_value)
 
     def predict(self, X):
         return self.root(X)
 
-def make_node(X, y):
-    split = find_best_split(X, y)
+def make_node(X, y, leaf_predictor, get_split_candidates, impurity, make_split):
+    split = find_best_split(
+        X, y,
+        get_split_candidates=get_split_candidates,
+        impurity=impurity,
+        make_split=make_split)
     if not split:
-        # TODO AS: Leaf predictor needs to be parametrized
-        leaf_value = np.mean(y)
+        leaf_value = leaf_predictor(y)
         return lambda X: leaf_value
 
     mask = split(X)
     X_right, y_right = X[mask], y[mask]
     X_left, y_left = X[~mask], y[~mask]
 
-    right = make_node(X_right, y_right)
-    left = make_node(X_left, y_left)
+    right = make_node(X_right, y_right, leaf_predictor, get_split_candidates, impurity, make_split)
+    left = make_node(X_left, y_left, leaf_predictor, get_split_candidates, impurity, make_split)
 
     def decision(X):
         predictions = np.zeros(len(X))
@@ -30,11 +51,11 @@ def make_node(X, y):
 
     return decision
 
-def find_best_split(X, y):
+def find_best_split(X, y, get_split_candidates, impurity, make_split):
     # TODO AS: Criterion needs to be parametrized
     # TODO AS: Criterion - the less it is => the better?
     min_leaf_samples = 5
-    curr_value = criterion(y)
+    curr_value = impurity(y)
     curr_split = None
 
     for column in range(len(X[0])):
@@ -50,21 +71,10 @@ def find_best_split(X, y):
                 continue
 
             # TODO AS: Min leaf values should be encorporated here
-            split_value = (criterion(y_right) * len(y_right) + criterion(y_left) * len(y_left)) / len(y)
+            split_value = (impurity(y_right) * len(y_right) + impurity(y_left) * len(y_left)) / len(y)
             # TODO AS: Min gain should be encorporated here
             if (split_value < curr_value):
                 curr_split = split
                 curr_value = split_value
 
     return curr_split
-
-# TODO AS: Yeah, sure
-def get_split_candidates(column, X, y):
-    return [np.mean(X[:, column])]
-
-def make_split(column, value):
-    return lambda X: X[:, column] >= value
-
-def criterion(y):
-    mean = np.mean(y)
-    return np.mean((y - mean) ** 2)
