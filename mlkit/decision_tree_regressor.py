@@ -4,6 +4,12 @@ import numpy as np
 def get_mean_split(column, X, y):
     return [np.mean(X[:, column])]
 
+def get_random_split(column, X, y):
+    values = X[:, column]
+    min, max = np.min(values), np.max(values)
+    point = np.random.uniform(min, max)
+    return [point]
+
 def mse_impurity(y):
     mean = np.mean(y)
     return np.mean((y - mean) ** 2)
