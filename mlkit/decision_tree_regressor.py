@@ -1,6 +1,7 @@
 import numpy as np
 
 # TODO AS: Yeah, sure
+# TODO AS: Another approaches: exact, approx, hist
 def get_mean_split(column, X, y):
     return [np.mean(X[:, column])]
 

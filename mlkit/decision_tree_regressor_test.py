@@ -4,7 +4,6 @@ import pandas as pd
 
 from .decision_tree_regressor import DecisionTreeRegressor
 from .metrics import mae
-from .util import make_scaler
 
 def test_on_iris():
     full_path = os.path.realpath(__file__)
