@@ -1,5 +1,9 @@
 import numpy as np
-from .decision_tree_regressor import make_node, get_mean_split, mse_impurity, split_on_value
+from .decision_tree_regressor import (
+    make_node,
+    get_mean_split,
+    mse_impurity,
+    split_on_value)
 
 class GradientBoostingRegressor():
     def fit(self, X, y):
