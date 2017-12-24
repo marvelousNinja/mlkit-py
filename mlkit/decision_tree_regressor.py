@@ -11,6 +11,13 @@ def get_random_split(column, X, y):
     point = np.random.uniform(min, max)
     return [point]
 
+# TODO AS: Optimize it with dynamic programming
+def get_exact_split(column, X, y):
+    return np.unique(X[:, column])
+
+def get_quantile_split(column, X, y):
+    return np.percentile(X[:, column], [10, 20, 30, 40, 50, 60, 70, 80, 90])
+
 def mse_impurity(y):
     mean = np.mean(y)
     return np.mean((y - mean) ** 2)
