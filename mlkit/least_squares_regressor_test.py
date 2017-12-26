@@ -2,7 +2,7 @@ import os
 import pytest
 import pandas as pd
 
-from .normal_equation_regressor import NormalEquationRegressor
+from .least_squares_regressor import LeastSquaresRegressor
 from .metrics import mae
 from .util import make_scaler
 
@@ -16,7 +16,7 @@ def test_on_iris():
 
     scale = make_scaler(X[:400])
 
-    model = NormalEquationRegressor()
+    model = LeastSquaresRegressor()
 
     model.fit(scale(X[:400]), y[:400])
     y_pred = model.predict(scale(X[400:]))

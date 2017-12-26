@@ -1,6 +1,6 @@
 import numpy as np
 
-class NormalEquationRegressor():
+class LeastSquaresRegressor():
     def fit(self, X, y):
         X = np.c_[X, np.ones(len(X))]
         self.w = np.linalg.inv(X.T @ X) @ X.T @ y
