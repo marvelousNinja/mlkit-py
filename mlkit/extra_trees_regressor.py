@@ -1,6 +1,7 @@
 import numpy as np
 from .decision_tree_regressor import (
     make_node,
+    get_sqrt_random_columns,
     get_random_split,
     mse_impurity,
     split_on_value)
@@ -12,6 +13,7 @@ class ExtraTreesRegressor():
             # TODO AS: Bootstrapping should be a parameter?
             root = make_node(
                 X, y,
+                sample_columns=get_sqrt_random_columns,
                 leaf_predictor=np.mean,
                 get_split_candidates=get_random_split,
                 impurity=mse_impurity,

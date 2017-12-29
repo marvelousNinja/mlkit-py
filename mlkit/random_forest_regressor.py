@@ -1,6 +1,7 @@
 import numpy as np
 from .decision_tree_regressor import (
     make_node,
+    get_sqrt_random_columns,
     get_mean_split,
     mse_impurity,
     split_on_value)
@@ -15,6 +16,7 @@ class RandomForestRegressor():
             X_sample, y_sample = X[sample_ids], y[sample_ids]
             root = make_node(
                 X_sample, y_sample,
+                sample_columns=get_sqrt_random_columns,
                 leaf_predictor=np.mean,
                 get_split_candidates=get_mean_split,
                 impurity=mse_impurity,

@@ -1,6 +1,7 @@
 import numpy as np
 from .decision_tree_regressor import (
     make_node,
+    get_all_columns,
     get_mean_split,
     mse_impurity,
     split_on_value)
@@ -17,6 +18,7 @@ class GradientBoostingRegressor():
 
             tree = make_node(
                 X, negative_gradient,
+                sample_columns=get_all_columns,
                 leaf_predictor=np.mean,
                 get_split_candidates=get_mean_split,
                 impurity=mse_impurity,

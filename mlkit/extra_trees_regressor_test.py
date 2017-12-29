@@ -16,4 +16,4 @@ def test_on_iris():
     model = ExtraTreesRegressor()
     model.fit(X[:400], y[:400])
     y_pred = model.predict(X[400:])
-    assert mae(y[400:], y_pred) == pytest.approx(3.2, 0.1)
+    assert mae(y[400:], y_pred) == pytest.approx(3.9, 0.1)
