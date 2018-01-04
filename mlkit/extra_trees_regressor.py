@@ -1,5 +1,5 @@
 import numpy as np
-from .decision_tree_regressor import (
+from mlkit.decision_tree_regressor import (
     make_node,
     get_sqrt_random_columns,
     get_random_split,

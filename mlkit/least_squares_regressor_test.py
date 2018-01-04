@@ -2,9 +2,9 @@ import os
 import pytest
 import pandas as pd
 
-from .least_squares_regressor import LeastSquaresRegressor
-from .metrics import mae
-from .util import make_scaler
+from mlkit.least_squares_regressor import LeastSquaresRegressor
+from mlkit.metrics import mae
+from mlkit.util import make_scaler
 
 def test_on_iris():
     full_path = os.path.realpath(__file__)

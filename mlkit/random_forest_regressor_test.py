@@ -2,8 +2,8 @@ import os
 import pytest
 import pandas as pd
 
-from .random_forest_regressor import RandomForestRegressor
-from .metrics import mae
+from mlkit.random_forest_regressor import RandomForestRegressor
+from mlkit.metrics import mae
 
 def test_on_iris():
     full_path = os.path.realpath(__file__)

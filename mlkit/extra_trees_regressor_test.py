@@ -2,8 +2,8 @@ import os
 import pytest
 import pandas as pd
 
-from .extra_trees_regressor import ExtraTreesRegressor
-from .metrics import mae
+from mlkit.extra_trees_regressor import ExtraTreesRegressor
+from mlkit.metrics import mae
 
 def test_on_iris():
     full_path = os.path.realpath(__file__)

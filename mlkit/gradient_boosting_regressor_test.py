@@ -2,8 +2,8 @@ import os
 import pytest
 import pandas as pd
 
-from .gradient_boosting_regressor import GradientBoostingRegressor
-from .metrics import mae
+from mlkit.gradient_boosting_regressor import GradientBoostingRegressor
+from mlkit.metrics import mae
 
 def test_on_iris():
     full_path = os.path.realpath(__file__)
