@@ -7,10 +7,15 @@ from mlkit.decision_tree_regressor import (
     split_on_value)
 
 class ExtraTreesRegressor():
+    def __init__(self, n_estimators=10, seed=0):
+        self.n_estimators = n_estimators
+        self.seed = seed
+        self.trees = None
+
     def fit(self, X, y):
+        np.random.seed(self.seed)
         self.trees = []
-        for i in range(10):
-            # TODO AS: Bootstrapping should be a parameter?
+        for i in range(self.n_estimators):
             root = make_node(
                 X, y,
                 sample_columns=get_sqrt_random_columns,

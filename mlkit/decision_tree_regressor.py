@@ -39,20 +39,6 @@ def mse_impurity(y):
 def split_on_value(column, value):
     return lambda X: X[:, column] >= value
 
-class DecisionTreeRegressor():
-    def fit(self, X, y):
-        self.root = make_node(
-            X, y,
-            leaf_predictor=np.mean,
-            # TODO AS: All these needed for split only
-            sample_columns=get_all_columns,
-            get_split_candidates=get_mean_split,
-            impurity=mse_impurity,
-            make_split=split_on_value)
-
-    def predict(self, X):
-        return self.root(X)
-
 def make_node(X, y, leaf_predictor, sample_columns, get_split_candidates, impurity, make_split):
     split = find_best_split(
         X, y,
@@ -107,3 +93,22 @@ def find_best_split(X, y, sample_columns, get_split_candidates, impurity, make_s
                 curr_value = split_value
 
     return curr_split
+
+class DecisionTreeRegressor():
+    def __init__(self, seed=0):
+        self.seed = seed
+        self.root = None
+
+    def fit(self, X, y):
+        np.random.seed(self.seed)
+        self.root = make_node(
+            X, y,
+            leaf_predictor=np.mean,
+            # TODO AS: All these needed for split only
+            sample_columns=get_all_columns,
+            get_split_candidates=get_mean_split,
+            impurity=mse_impurity,
+            make_split=split_on_value)
+
+    def predict(self, X):
+        return self.root(X)
